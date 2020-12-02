@@ -20,6 +20,7 @@ export class LoginPageComponent implements OnInit {
       this.hello = response['data']
     }, error =>{
       console.log(error)
+      this.hello = error['message'];
     }
     )
   }
