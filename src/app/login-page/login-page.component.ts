@@ -1,28 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import {AuthenticateService} from '../service/authenticate.service'
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss']
+  styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
+  hello: String = 'original';
+  submitted = false;
+  password = '';
+  username = '';
 
-  hello : String = "original";
+  constructor(private http: HttpClient, private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticateService) {}
 
-  constructor(private http : HttpClient) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
+  getData() {
+    this.submitted = true;
+
+    //this.loading = true;
+    this.authenticationService
+      .login(this.username, this.password)
+      .pipe(first())
+      .subscribe(
+        (data) => {
+          this.router.navigate([this.returnUrl]);
+        },
+        (error) => {
+          this.error = error;
+          this.loading = false;
+        }
+      );
   }
-
-  getData(){
-    this.http.get("http://localhost:3000/api").subscribe(response => {
-      this.hello = response['data']
-    }, error =>{
-      console.log(error)
-      this.hello = error['message'];
-    }
-    )
-  }
-
 }
