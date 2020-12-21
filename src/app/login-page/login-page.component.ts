@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import {AuthenticateService} from '../service/authenticate.service'
 
+import { first } from 'rxjs/operators';
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -19,10 +21,13 @@ export class LoginPageComponent implements OnInit {
     private router: Router,
     private authenticationService: AuthenticateService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
 
   getData() {
     this.submitted = true;
+    console.log(this.username + "" + this.password)
 
     //this.loading = true;
     this.authenticationService
@@ -30,11 +35,14 @@ export class LoginPageComponent implements OnInit {
       .pipe(first())
       .subscribe(
         (data) => {
-          this.router.navigate([this.returnUrl]);
+          //this.router.navigate([this.returnUrl]);
+          console.log("success")
+          console.log(data)
         },
         (error) => {
-          this.error = error;
-          this.loading = false;
+          //this.error = error;
+          //this.loading = false;
+          console.log(error)
         }
       );
   }

@@ -10,17 +10,17 @@
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label id="username">Username</mat-label>
-    <input matInput placeholder="Ex. Johnny" />
+    <input matInput placeholder="Ex. Johnny" [(ngModel)]="username" name="username" />
   </mat-form-field>
 </form>
 <form class="example-form">
   <mat-form-field class="example-full-width">
     <mat-label id='password'>Password</mat-label>
-    <input matInput />
+    <input [(ngModel)]="password" matInput name="password" />
   </mat-form-field>
 </form>
 <div class="example-form">
-  <button mat-flat-button color="primary">Login</button>
+  <button mat-flat-button color="primary" (click)="getData()">Login</button>
 </div>
 <div class="example-form">
   <button mat-flat-button color="primary" routerLink="/register">Register</button>
