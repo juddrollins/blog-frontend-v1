@@ -1,1 +1,8 @@
-<p>home works!</p>
+  <mat-toolbar color="primary" *ngIf="currentUser">
+    <span>Welcome {{username}}! </span>
+    <div>
+      <a mat-button [routerLink]="'/'"> Home </a>
+      <a mat-button (click)="logout()"> Logout </a>
+    </div>
+  </mat-toolbar>
+

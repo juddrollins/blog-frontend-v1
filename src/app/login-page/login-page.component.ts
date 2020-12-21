@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import {AuthenticateService} from '../service/authenticate.service'
+import { AuthenticateService } from '../service/authenticate.service';
 
 import { first } from 'rxjs/operators';
 
@@ -14,20 +14,25 @@ import { first } from 'rxjs/operators';
 export class LoginPageComponent implements OnInit {
   hello: String = 'original';
   submitted = false;
+  returnUrl: string;
   password = '';
   username = '';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute,
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticateService) {}
+    private authenticationService: AuthenticateService
+  ) {}
 
   ngOnInit(): void {
-
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log(this.returnUrl);
   }
 
   getData() {
     this.submitted = true;
-    console.log(this.username + "" + this.password)
+    console.log(this.username + '' + this.password);
 
     //this.loading = true;
     this.authenticationService
@@ -36,13 +41,14 @@ export class LoginPageComponent implements OnInit {
       .subscribe(
         (data) => {
           //this.router.navigate([this.returnUrl]);
-          console.log("success")
-          console.log(data)
+          console.log('success');
+          console.log(data);
+          this.router.navigate([this.returnUrl]);
         },
         (error) => {
           //this.error = error;
           //this.loading = false;
-          console.log(error)
+          console.log(error);
         }
       );
   }
