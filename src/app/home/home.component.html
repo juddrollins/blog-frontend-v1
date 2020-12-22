@@ -1,23 +1,28 @@
-  <mat-toolbar color="primary" *ngIf="currentUser">
-    <span>Welcome {{username}}! </span>
-    <div>
-      <a mat-button [routerLink]="'/'"> Home </a>
-      <a mat-button (click)="logout()"> Logout </a>
-    </div>
-  </mat-toolbar>
+<mat-toolbar color="primary" *ngIf="currentUser">
+  <span>Welcome {{ username }}! </span>
+  <div>
+    <a mat-button [routerLink]="'/'"> Home </a>
+    <a mat-button (click)="logout()"> Logout </a>
+  </div>
+</mat-toolbar>
 
-  <mat-card class="postcard">
-    <mat-card-header>
-      <mat-card-title>Post Here</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-form-field class="example-full-width">
-        <input matInput placeholder="Ex. Hello World">
+<mat-card class="postcard">
+  <mat-card-header>
+    <mat-card-title>Post Here</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="input">
+        <input
+          matInput
+          placeholder="Ex. Hello World"
+          [(ngModel)]="content"
+          name="content"
+        />
       </mat-form-field>
-    </mat-card-content>
-    
-    <mat-card-actions>
-      <button mat-button (click)=post()>POST</button>
+    </form>
+    <mat-card-actions class=post>
+      <button mat-button (click)="post()">POST</button>
     </mat-card-actions>
-
-  </mat-card>
+  </mat-card-content>
+</mat-card>

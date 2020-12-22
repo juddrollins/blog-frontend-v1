@@ -11,7 +11,7 @@ import { AuthenticateService } from '../service/authenticate.service';
 export class HomeComponent implements OnInit {
   currentUser: any;
   username: string;
-  content = 'sdf';
+  content = '';
 
   constructor(
     private router: Router,
