@@ -32,7 +32,7 @@ export class LoginPageComponent implements OnInit {
 
   getData() {
     this.submitted = true;
-    console.log(this.username + '' + this.password);
+    //console.log(this.username + '' + this.password);
 
     //this.loading = true;
     this.authenticationService
