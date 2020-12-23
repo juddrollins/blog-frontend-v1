@@ -6,7 +6,7 @@
   </div>
 </mat-toolbar>
 
-<mat-card class="postcard">
+<mat-card class="card">
   <mat-card-header>
     <mat-card-title>Post Here</mat-card-title>
   </mat-card-header>
@@ -21,8 +21,15 @@
         />
       </mat-form-field>
     </form>
-    <mat-card-actions class=post>
+    <mat-card-actions class="post">
       <button mat-button (click)="post()">POST</button>
     </mat-card-actions>
   </mat-card-content>
+</mat-card>
+
+<mat-card *ngFor="let post of posts" class="card">
+  <mat-card-header>
+    <mat-card-title>{{ post.title }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>{{ post.content }} </mat-card-content>
 </mat-card>

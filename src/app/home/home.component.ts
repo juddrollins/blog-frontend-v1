@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   currentUser: any;
   username: string;
   content = '';
+  posts: any;
 
   constructor(
     private router: Router,
@@ -24,18 +25,31 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getPosts();
+  }
+
+  getPosts() {
+    this.http
+      .get<any>('http://localhost:3000/blog/getAll')
+      .pipe()
+      .subscribe((data) => {
+        this.posts = data;
+        console.log(this.posts);
+      });
+  }
 
   post() {
     console.log(this.content);
     this.http
       .post<any>('http://localhost:3000/blog/post', {
-        title: 'title',
+        title: this.username,
         content: this.content,
       })
       .pipe()
       .subscribe(() => {
         console.log('success');
+        this.getPosts();
       });
   }
 
